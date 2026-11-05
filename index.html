@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111e1d"><title>BEYOND THE SUMMIT — Kilimanjaro's horizon</title><meta name="description" content="Explore the terrain potentially visible from Kilimanjaro. A moving map and linked mountain profile reveal what stands between you and the horizon."><link rel="icon" href="icon.svg"><link rel="stylesheet" href="styles.css?v=20261105-terrain-detail"></head>
+<body>
+<header><a class="brand" href="./"><svg viewBox="0 0 44 36" aria-hidden="true"><path d="M2 32 17 8 23 17 28 3 42 32M10 32l12-15 8 15M14 13l3 5 4-3"/></svg><span>BEYOND THE SUMMIT<small>A study in sight · Kilimanjaro</small></span></a><nav><span class="day">05 / SENSES: SIGHT</span><button data-dialog="help">How to explore <span>↗</span></button><button data-dialog="about">About the data <span>↗</span></button></nav></header>
+<main>
+<aside>
+<div class="eyebrow"><i></i> FROM THE ROOF OF AFRICA</div>
+<h1>Where does<br>the view <em>end?</em></h1>
+<p class="intro">Stand on Kilimanjaro. Follow a direction. Discover the landscape that opens up—and the ridges that hide it.</p>
+<div class="summit"><span>YOUR VANTAGE POINT</span><h2>Uhuru Peak <b>↟</b></h2><div><strong>5,895<small> m</small></strong><span>above sea level</span></div><small>3.07583° S · 37.35333° E</small></div>
+<section class="controls"><label for="radius">01 / LOOK FARTHER <output id="radius-value">400 km</output></label><input id="radius" type="range" min="10" max="1000" step="10" value="400"><div class="range-ends"><span>10 km</span><span>1,000 km</span></div><label for="bearing">02 / CHOOSE A DIRECTION <output id="bearing-value">000° N</output></label><input id="bearing" type="range" min="0" max="359.75" step="0.25" value="0"><div class="range-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div><button id="play" class="play" disabled><span id="play-icon">▶</span> <span id="play-label">Start the sweep</span><span>360°</span></button></section>
+<section class="places"><h3>LOOK TOWARDS</h3><div id="landmarks"></div></section>
+<label class="switch"><input id="curvature" type="checkbox" checked><span class="track"></span><span>Account for Earth's curve<small id="curve-hint">Allows for light bending through the air</small></span></label>
+
+</aside>
+<section class="workspace">
+<section class="map-panel" aria-label="Visibility map"><canvas id="map" tabindex="0" aria-label="Terrain visibility map. Click a location to inspect its direction and elevation. Arrow keys change direction."></canvas><div class="map-heading"><div class="eyebrow">01 / THE LANDSCAPE</div><h2>A horizon in every direction.</h2><p id="map-subtitle">Red reveals ground potentially in view.</p></div><details class="visible-features" id="visible-features" open><summary>IN VIEW <span id="visible-count">0</span></summary><div class="feature-body"><p class="feature-caption">Landmarks found by the scan</p><ul id="visible-list"></ul><p id="visible-empty">Not scanned yet</p></div></details><div class="north">N<span>↑</span></div><div class="map-status"><i></i><span id="map-status">PREPARING THE LANDSCAPE</span></div><div class="map-legend"><span><i class="visible"></i>Potentially visible</span><span><i class="muted"></i>Hidden by terrain or curve</span></div><div class="map-scale" id="map-scale">50 km ━━━━━</div><div class="map-credit">Elevation: Mapzen / USGS · Boundaries: Natural Earth</div><div id="loading"><span class="loader"></span><h2>Finding the horizon</h2><p>Loading the terrain around Kilimanjaro…</p></div><div id="map-tooltip" hidden></div></section>
+<section class="profile-panel"><div class="profile-header"><div><div class="eyebrow">02 / ALONG THE GOLD LINE</div><h2 id="profile-title">Looking north &middot; 400 km</h2></div><div class="profile-key"><span><i class="terrain"></i>Terrain</span><span><i class="visible"></i>Visible ground</span><span><i class="dashed"></i>Sightline to selected point</span></div></div><div class="profile-chart"><canvas id="profile" aria-label="Elevation profile along the selected map direction. Click the profile to inspect a point."></canvas></div><div class="reading" id="point-reading" hidden><span id="point-status" class="status-dot"></span><p id="reading"></p><span id="point-distance"></span></div></section>
+</section>
+</main>
+<dialog id="help"><button class="close" aria-label="Close">×</button><div class="eyebrow">A SMALL FIELD GUIDE</div><h2>Follow the view.</h2><ol><li><b>Choose a direction.</b> Move the direction slider, click the map or choose a landmark.</li><li><b>Look farther.</b> Adjust the distance to explore up to 1,000 km from Kilimanjaro.</li><li><b>Start the sweep.</b> The gold line reveals visible ground as it passes, instead of colouring the whole map in advance. The mountain profile and selected point follow the beam. Pause whenever something catches your eye.</li><li><b>Inspect a place.</b> Click the map or the profile. A sightline shows whether the terrain allows a view, and where it is blocked.</li></ol><p>Red marks potentially visible ground in directions already scanned. Unscanned terrain stays uncoloured; it has not yet been checked on screen. Pause and resume to keep your progress. A completed scan stops after one turn; choose Scan again to start fresh.</p><p>The curve switch includes or ignores Earth's curve, so you can see how it affects the view.</p></dialog>
+<dialog id="about">
+<button class="close" aria-label="Close">&times;</button>
+<div class="eyebrow">ABOUT THE DATA</div>
+<h2>What shapes the view?</h2>
+<p>The map uses measured landscape heights to explore what could be seen from Kilimanjaro. Nearby ridges can hide distant places, and Earth's curve can hide lower ground farther away.</p>
+<h3>What the colours mean</h3>
+<p>As the line scans, red marks ground that could be visible. Darker areas within the scanned section are hidden by the landscape or Earth's curve. Areas the line has not reached are still waiting to be explored.</p>
+<h3>What the chart shows</h3>
+<p>The chart follows the same direction as the line on the map. It shows the hills and valleys along that route. When you select a point, the dotted line helps explain whether anything blocks the view.</p>
+<h3>How close is this to the view outside?</h3>
+<p>This is an estimate for clear conditions. Clouds and haze can shorten the view. The height data is more detailed near Kilimanjaro and less detailed farther away, so small ridges, trees and buildings may be missed.</p>
+<details class="data-details"><summary>How the calculation works</summary>
+<p>The calculation checks 1,440 directions around the summit. Along each direction, it compares each point with the ground in front of it to see whether the view is blocked.</p>
+<p>The viewpoint is 2 metres above the summit surface in the height data: <b id="model-height">loading</b>. This height can differ slightly from the familiar summit height of 5,895 m.</p>
+<p>Earth's curve is included by default, along with a small adjustment for how the atmosphere bends light. The adjustment is fixed; it does not follow the day's weather. Switching the curve off shows how ignoring it changes the result.</p>
+<p>The source grid cells are about 38 metres wide near the summit, 153 metres in the surrounding region and 611 metres farther away. A grid cell holds one landscape height. Smaller cells can show smaller features. The wider background is coarser and is only used to show the surrounding landscape.</p>
+<p>The chart stretches heights to make hills and valleys easier to read. The land is shown at its height above sea level, so hills and valleys stay clear at longer distances. The dotted sightline accounts for Earth's curve when the switch is on. A line towards a named mountain may miss its exact summit. Sea surfaces are set to sea level; lake heights come from the source data.</p>
+<p><a href="data/metadata.json" target="_blank" rel="noopener">View the full source record and calculation settings &nearr;</a></p>
+</details>
+<details class="data-details"><summary>Data sources and short names</summary>
+<p>Landscape heights come from <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Mapzen / Tilezen Terrain Tiles</a>. Country boundaries come from Natural Earth.</p>
+<dl><dt>DEM &mdash; Digital Elevation Model</dt><dd>A grid of landscape heights.</dd><dt>SRTM &mdash; Shuttle Radar Topography Mission</dt><dd>A space mission that measured Earth's surface heights.</dd><dt>GMTED &mdash; Global Multi-resolution Terrain Elevation Data</dt><dd>A worldwide collection of landscape heights.</dd><dt>AWS &mdash; Amazon Web Services</dt><dd>The service that hosts the source files.</dd></dl>
+<p>Credits: Mapzen / Tilezen. SRTM and GMTED2010 terrain data courtesy of the U.S. Geological Survey. Global ETOPO1 terrain data: U.S. National Oceanic and Atmospheric Administration. Natural Earth boundaries are public domain and shown for context.</p>
+</details>
+</dialog>
+<script src="scan-state.js?v=20261105-terrain-detail" defer></script><script src="app.js?v=20261105-terrain-detail" defer></script></body></html>
